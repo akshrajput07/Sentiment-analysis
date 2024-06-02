@@ -1,0 +1,287 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Destination</title>
+  <!-- css -->
+  <link rel="stylesheet" href="{% static 'style/Destination.css' %}">
+  <!-- css -->
+ <link rel="stylesheet" href="{% static 'style/style.css' %}">
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- font awesome -->
+  <script src="https://kit.fontawesome.com/b203dc9eba.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-center  header-transparent ">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <h1><a href="{% url 'home' %}">Travel with Nature</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="{% url 'home' %}">Home</a></li>
+    
+          <li><a class="nav-link scrollto " href="{% url 'places' %}">Places</a></li>
+         
+          {% if user.is_authenticated %}
+          <li>Hello,{{user.first_name}}</li>
+          <li><a class="nav-link scrollto" href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+          
+          <li><a class="nav-link scrollto" href="{% url 'login' %}">Login</a></li>
+          
+          <li><a class="nav-link scrollto" href="{% url 'register' %}">Register</a></li>
+          
+          {% endif %}
+          
+          
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- background -->
+  <div class="place-background">
+    <div class="place-background-content">
+      <h1>Welcome to Travel with Nature</h1>
+      <br/>
+      <p>“A village is a living organic entity, with blood flowing through its veins,<br/> and with a definite pulse and heartbeat.
+        <br/> It has its own distinct personality and its own dark caustic humour.” <br/>– Leonardo Donofrio</p>
+    </div>
+
+  </div>
+
+  <!-- Destination detail -->
+  <div class="Destination">
+    <div class="Destination_detail">
+      <div class="Destination_info">
+        <!-- <div class="Destination_info_img">
+          <img src="images/ourvission-1.jpg" alt="">
+        </div> -->
+
+        <div id="carDetailsSlider" class="carousel car-details-sliders slide mb-40">
+          <!-- main slider carousel items -->
+          <div class="carousel-inner">
+              <div class="active item carousel-item" data-slide-number="0">
+                  <img src="{{ single_page.place_mainimg.url }}" class="img-fluid" alt="slider-car">
+              </div>
+              {% if single_page.place_img1 %}
+              <div class="item carousel-item" data-slide-number="1">
+                  <img src="{{ single_page.place_img1.url }}" class="img-fluid" alt="slider-car">
+              </div>
+              {% endif %}
+              {% if single_page.place_img2 %}
+              <div class="item carousel-item" data-slide-number="2">
+                  <img src="{{ single_page.place_img2.url }}" class="img-fluid" alt="slider-car">
+              </div>
+              {% endif %}
+              {% if single_page.place_img3 %}
+              <div class="item carousel-item" data-slide-number="4">
+                  <img src="{{ single_page.place_img3.url }}" class="img-fluid" alt="slider-car">
+              </div>
+              {% endif %}
+              {% if single_page.place_img4 %}
+              <div class="item carousel-item" data-slide-number="5">
+                  <img src="{{ single_page.place_img4.url }}" class="img-fluid" alt="slider-car">
+              </div>
+              {% endif %}
+          </div>
+          <!-- main slider carousel nav controls -->
+          <div class="carousel-indicators-section clearfix">
+              <ul class="carousel-indicators car-properties list-inline nav nav-justified">
+                  <li class="list-inline-item active">
+                      <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#carDetailsSlider">
+                          <img src="{{ single_page.place_mainimg.url }}" class="img-fluid" alt="small-car">
+                      </a>
+                  </li>
+                  {% if single_page.place_img1 %}
+                  <li class="list-inline-item">
+                      <a id="carousel-selector-1" data-slide-to="1" data-target="#carDetailsSlider">
+                          <img src="{{ single_page.place_img1.url }}" class="img-fluid" alt="small-car">
+                      </a>
+                  </li>
+                  {% endif %}
+                  {% if single_page.place_img2 %}
+                  <li class="list-inline-item">
+                      <a id="carousel-selector-2" data-slide-to="2" data-target="#carDetailsSlider">
+                          <img src="{{ single_page.place_img2.url }}" class="img-fluid" alt="small-car">
+                      </a>
+                  </li>
+                  {% endif %}
+                  {% if single_page.place_img3 %}
+                  <li class="list-inline-item">
+                      <a id="carousel-selector-3" data-slide-to="3" data-target="#carDetailsSlider">
+                          <img src="{{ single_page.place_img3.url }}" class="img-fluid" alt="small-car">
+                      </a>
+                  </li>
+                  {% endif %}
+                  {% if single_page.place_img4 %}
+                  <li class="list-inline-item">
+                      <a id="carousel-selector-4" data-slide-to="4" data-target="#carDetailsSlider">
+                          <img src="{{ single_page.place_img4.url }}" class="img-fluid" alt="small-car">
+                      </a>
+                  </li>
+                  {% endif %}
+              </ul>
+          </div>
+        </div>
+            <br><br>
+        <div class="Destination_info_content">
+          <h1>{{single_page.place_name}}</h1>
+          <p>{{single_page.place_city}},{{single_page.place_state}}</p>
+          <br>
+          <h5>
+            {{single_page.place_desc}}
+          </h5>
+        </div>
+      </div>
+      
+      <div class="CouchSurfing_info">
+        <table>
+          {% if single_page.cs_available %}
+            <tr >
+              <img src="{% static 'images/default cs.jpg' %}" alt="">
+            </tr>
+
+            <tr >
+              <td>NAME : {{single_page.cs_name}}</td>
+            </tr>
+            <tr>
+              <td>GENDER : {{single_page.cs_gender}}</td>
+            </tr>
+            <tr>
+              <td>PHONE NUMBER : {{single_page.cs_number}}</td>
+            </tr>
+            <tr>
+              <td>ADDRES : {{single_page.cs_address}}</td>
+            </tr>
+            <tr>
+              <td>CITY : {{single_page.place_city}}</td>
+            </tr>
+            <tr>
+              <td>PROFESSION : {{single_page.cs_proff}}</td>
+            </tr>
+            {% else %}
+            <tr >
+              <img src="{% static 'images/default cs.jpg' %}" alt="">
+            </tr>
+            <tr >
+              <td>NAME : N/A</td>
+            </tr>
+            <tr>
+              <td>GENDER : N/A</td>
+            </tr>
+            <tr>
+              <td>PHONE NUMBER : N/A</td>
+            </tr>
+            <tr>
+              <td>ADDRES : N/A</td>
+            </tr>
+            <tr>
+              <td>CITY : N/A</td>
+            </tr>
+            <tr>
+              <td>PROFESSION : N/A</td>
+            </tr>
+            {% endif %}
+        </table>
+      </div>
+      
+    </div>
+    <hr>
+    <br/> 
+    <div class="Comments">
+    <h2>   Comments!!!</h2>
+    {% if user.is_authenticated %}
+    <strong>Want Add a new Comment.....<a href="{% url 'add_comment' single_page.id %}">Add one</a></strong>
+    {% endif  %}
+    <br/>
+    <br/>
+    <div class="scroll-bg">
+      <div class="scroll-div">
+        <div class="scroll-object">
+      
+      {% if user.is_authenticated %}
+     
+        {% if not single_page.comments.all %}
+        
+            No Comments yet....<a href="{% url 'add_comment' single_page.id %}">Add one</a>
+        {% else %}
+        
+      
+            {%for comment in single_page.comments.all %}
+              <strong>
+                
+                {{comment.name}}-{{comment.date_added}} 
+
+              </strong>
+              <br/>
+              >>>>{{comment.body}}
+              <br/>
+              ((Comment is {{comment.analy}}))
+              <br />
+              <br/>
+              
+            {% endfor %}
+        {% endif %}
+      {% else %}
+      <p>Login to add and read Comments about this place!</p>
+      {% endif %}
+      <br/>
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+<br/>
+  
+
+
+  <!-- footer -->
+  <footer id="footer">
+    <div class="container">
+      <h3>Travel With Nature</h3>
+      <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
+      <div class="social-links">
+        <!-- <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> -->
+        <a href="#" class="twitter"><i class="fab fa-instagram-square"></i></a>
+        <!-- <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a> -->
+        <a href="#" class="facebook"><i class="fab fa-facebook"></i></a>
+        <!-- <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a> -->
+        <a href="#" class="instagram"><i class="fab fa-twitter-square"></i></a>
+
+        <!-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+      <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a> -->
+      </div>
+      <div class="copyright">
+        &copy; Copyright <strong><span>Travel with Nature</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/selecao-bootstrap-template/ -->
+        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
